@@ -49,6 +49,9 @@ class Reserva:
             if self.estado == "Cancelada":
                 raise ErrorReserva("La reserva ya está cancelada")
 
+            if self.estado != "Confirmada":
+                raise ErrorReserva("Solo se pueden cancelar reservas confirmadas")
+
             self.estado = "Cancelada"
 
         except Exception as e:
@@ -92,7 +95,10 @@ if __name__ == "__main__":
         # Error intencional
         reserva.confirmar()
 
+        # Prueba cancelación
+        reserva.cancelar()
+
     except Exception as e:
         print("Error detectado:", e)
 
-input("\nPresiona Enter para salir...")
+    input("\nPresiona Enter para salir...")

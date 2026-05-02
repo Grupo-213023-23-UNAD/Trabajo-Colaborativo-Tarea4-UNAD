@@ -34,17 +34,23 @@ class Servicio(ABC):
 
 class ReservaSala(Servicio):
     def calcular_costo(self, cantidad):
+        if cantidad <= 0:
+            raise ValueError("La cantidad debe ser mayor a cero")
         return self.precio * cantidad
 
 
 class AlquilerEquipo(Servicio):
     def calcular_costo(self, cantidad):
+        if cantidad <= 0:
+            raise ValueError("La cantidad debe ser mayor a cero")
         return self.precio * cantidad
 
 
 class Asesoria(Servicio):
     def calcular_costo(self, cantidad):
         # Se aplica un recargo del 20%
+        if cantidad <= 0:
+            raise ValueError("La cantidad debe ser mayor a cero")
         return self.precio * cantidad * 1.2
 
 
@@ -71,9 +77,8 @@ if __name__ == "__main__":
         print(s3.descripcion())
         print("Costo:", s3.calcular_costo(2))
 
-        # Caso inválido (error)
+        # Error intencional
         s4 = ReservaSala("", -10)
 
     except Exception as e:
         print("Error en Servicio:", e)
-        
